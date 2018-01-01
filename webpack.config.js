@@ -42,7 +42,7 @@ module.exports = {
        },
        {
             test: /\.css$/, 
-            loader: ExtractTextPlugin.extract("style", "css!postcss")
+            loader: ExtractTextPlugin.extract("style-loader", "css!postcss")
        },
        {
        	    test: require.resolve("jquery"), 

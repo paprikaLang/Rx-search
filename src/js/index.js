@@ -5,6 +5,7 @@ import {
   userTemplate
 } from './templates';
 $(() => {
+	const $container = $('.content_container');
 	const $input = $('.search');
 	// const observable = Rx.Observable.fromEvent($input,'keyup')
 	//                    .map(() => $input.val().trim())
@@ -17,16 +18,21 @@ $(() => {
 	      .filter((text) => !!text)
 	      .distinctUntilChanged()
 	      .do((value) => console.log(value))
-	      .flatMapLatest(getRepos);
+	      .flatMapLatest(getRepos)
+	      .do((results) => $container.html(''))
+	      .flatMap((results) => Rx.Observable.from(results))
+	      .map((repos) => $(reposTemplate(repos)))
+	      .do(($repos) => {
+	      	$container.append($repos);
+	      });
+
 	observable.subscribe((data)=>{
-          showNewResults(data);
+        console.log('success');
 	},(err) => {
 		console.log(err);
 	},() => {
 		console.log('completed');
 	});
-	const showNewResults = (items) => {
 
-	}
 });
 
