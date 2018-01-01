@@ -4,6 +4,9 @@ import {
   reposTemplate,
   userTemplate
 } from './templates';
+import '../css/base.css';
+
+
 $(() => {
 	const $container = $('.content_container');
 	const $input = $('.search');

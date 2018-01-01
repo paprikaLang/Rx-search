@@ -1,5 +1,5 @@
 const webpack = require('webpack');
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CleanPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const postcssImport = require("postcss-import");
@@ -32,7 +32,7 @@ module.exports = {
     path: PATH.BUILD_PATH
   },
   module: {
-   loaders:[
+   rules:[
        {    test: /\.js$/,
 	        exclude: /(node_modules)/,
 	        loader: "babel-loader",
@@ -42,7 +42,22 @@ module.exports = {
        },
        {
             test: /\.css$/, 
-            loader: ExtractTextPlugin.extract("style-loader", "css!postcss")
+            exclude: /node_modules/,
+            use: ExtractTextPlugin.extract({
+                fallback:"style-loader",
+
+                use: [
+                    {
+                      loader:"css-loader",
+                      options:{
+                        minimize: true,
+                      }
+                    },
+                    {
+                      loader: "postcss-loader"
+                    }
+                ]
+            })
        },
        {
        	    test: require.resolve("jquery"), 
@@ -58,9 +73,7 @@ module.exports = {
     extensions: ['*', '.js', '.jsx'],
   },
   plugins: [
-     new ExtractTextPlugin("[name].bundle.css", {
-          allChunks: true
-     }),
+     new ExtractTextPlugin("index.bundle.css"),
      new webpack.ProvidePlugin({
 	      $: "jquery",
 	      jQuery: "jquery",
