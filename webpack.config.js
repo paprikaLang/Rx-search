@@ -33,7 +33,7 @@ module.exports = {
   },
   module: {
    rules:[
-       {    test: /\.js$/,
+       {  test: /\.js$/,
 	        exclude: /(node_modules)/,
 	        loader: "babel-loader",
 	        query:{
@@ -51,7 +51,7 @@ module.exports = {
                       loader:"css-loader",
                       options:{
                         minimize: true,
-                      }
+                    }
                     },
                     {
                       loader: "postcss-loader"

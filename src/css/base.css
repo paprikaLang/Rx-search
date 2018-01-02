@@ -78,12 +78,12 @@ input.search {
     }
 
     & .user_header_container {
-      width: 30px;
+      width: 60px;
       float: left;
       position: relative;
 
       & img.user_header {
-        width: 30px;
+        width: 60px;
         border-radius: 50%;
         box-shadow: 1px 1px 6px 0 rgba(0, 0, 0, 0.2);
         transition: all 400ms;
