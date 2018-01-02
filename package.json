@@ -2,7 +2,7 @@
   "name": "test",
   "version": "1.0.0",
   "description": "",
-  "main": "src/index.html",
+  "main": "index.js",
   "scripts": {
     "build": "./node_modules/webpack/bin/webpack.js -p",
     "dev-server": "./node_modules/webpack-dev-server/bin/webpack-dev-server.js --content-base build/",
