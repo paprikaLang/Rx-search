@@ -1,5 +1,5 @@
 import Rx from 'rx';
-import {polyfill} from 'es6-promise';
+import { polyfill } from 'es6-promise';
 import {TOKEN} from './const_value';
 polyfill();
 
@@ -24,7 +24,7 @@ export const formatRepoSizeAndUnit = (repoSize) => {
 // 创建一个 ajax 的 promise
 const getReposPromise = (query) => {
      return new Promise((resolve,reject) => {
-     	$.ajax({
+     	  $.ajax({
            type: "GET",
            url: `${SEARCH_REPOS}${query}`,
            success: (data) => {
@@ -34,11 +34,38 @@ const getReposPromise = (query) => {
            	console.log(err);
            	resolve([]);
            }
-     	});
+     	  });
      });
+};
+
+const getUserPromise = (data) => {
+  const { url, container } = data;
+  return new Promise((resolve, reject) => {
+    $.ajax({
+      type: "GET",
+      url: `${url}?access_token=${TOKEN}`,
+      success: (data) => {
+        resolve({
+          container,
+          data
+        });
+      },
+      error: (err) => {
+        console.log(err);
+        reject(null);
+      }
+    });
+  });
 };
 // 通过 fromPromise 创建一个 Observable
 export const getRepos = (query) => {
   const promise = getReposPromise(query);
   return Rx.Observable.fromPromise(promise);
 };
+
+export const getUser = (data) => {
+  const promise = getUserPromise(data);
+  return Rx.Observable.fromPromise(promise);
+};
+
+

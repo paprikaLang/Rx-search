@@ -73,7 +73,9 @@ module.exports = {
     extensions: ['*', '.js', '.jsx'],
   },
   plugins: [
-     new ExtractTextPlugin("index.bundle.css"),
+     new ExtractTextPlugin("index.bundle.css",{
+       allChunks: true
+     }),
      new webpack.ProvidePlugin({
 	      $: "jquery",
 	      jQuery: "jquery",
