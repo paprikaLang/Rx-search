@@ -29,8 +29,7 @@ module.exports = {
   },
   output: {
     filename: 'index.bundle.js',
-    path: PATH.BUILD_PATH,
-    publicPath: PATH.BUILD_PATH
+    path: PATH.BUILD_PATH
   },
   module: {
    rules:[
